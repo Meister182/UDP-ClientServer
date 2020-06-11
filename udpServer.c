@@ -44,10 +44,12 @@ void main(int argc, char **argv){
 
   bind(sockfd, (struct sockaddr*)&si_me, sizeof(si_me));
   addr_size = sizeof(si_other);
+  int count=0;
   while(1){
     recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)& si_other, &addr_size);
     inet_ntop(AF_INET, &si_other.sin_addr, clientIP, sizeof(clientIP));
-    printf("[+]From: %-15s Data: %s", clientIP, buffer);
+    printf("[%-3d]From: %-15s Data: %s", count, clientIP, buffer);
+    count++;
   }
 
 }

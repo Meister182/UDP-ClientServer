@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h> 
 
 void main(int argc, char **argv){
 
@@ -41,8 +42,9 @@ void main(int argc, char **argv){
  
   bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
 
-  for(int i=0; i<1; i++){
+  for(int i=0; i<72*5; i++){
     sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
-    printf("[+]Data Send: %s", buffer);
+    printf("[%-3d]Data Send: %s", i, buffer);
+    usleep(11500); // sending 72 packets per second
   }
 }

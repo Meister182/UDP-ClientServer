@@ -9,7 +9,7 @@ gcc udpClient.c -o udpClient
 # Run
 $ ./udpServer 1234<br/>
 $ ./udpServer 1234 from_ip_address<br/>
+
 $ ./udpClient 1234<br/>
 $ ./udpClient 1234 to_ip_address<br/>
 
-Thats the simple procedure to run this program.
