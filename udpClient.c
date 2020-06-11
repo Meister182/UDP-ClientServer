@@ -42,12 +42,8 @@ void main(int argc, char **argv){
   bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
 
   for(int i=0; i<1; i++){
+    buffer[115] = i;
     sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
     printf("[+]Data Send: %s", buffer);
-    // for(int i = 0; i< sizeof(buffer); i++)
-    // {
-    //   printf("%2x ", buffer[i]);
-    // }
-  	// printf("\n");
   }
 }
