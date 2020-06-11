@@ -48,11 +48,6 @@ void main(int argc, char **argv){
     recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)& si_other, &addr_size);
     inet_ntop(AF_INET, &si_other.sin_addr, clientIP, sizeof(clientIP));
     printf("[+]From: %-15s Data: %s", clientIP, buffer);
-    // for(int i = 0; i< sizeof(buffer); i++)
-    // {
-    //   printf("%2x ", buffer[i]);
-    // }
-  	// printf("\n");
   }
 
 }

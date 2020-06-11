@@ -36,13 +36,12 @@ void main(int argc, char **argv){
   serverAddr.sin_addr.s_addr = inet_addr(ipadr);
 
   // char buffer[] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17};
-  char buffer[1024];
+  char buffer[116]; //+32 bytes in 2nd stage
   strcpy(buffer, "Hello Server\n");
  
   bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
 
   for(int i=0; i<1; i++){
-    buffer[115] = i;
     sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
     printf("[+]Data Send: %s", buffer);
   }
