@@ -28,6 +28,7 @@ void main(int argc, char **argv){
   int sockfd;
   struct sockaddr_in si_me, si_other;
   char buffer[1024];
+  char clientIP[INET_ADDRSTRLEN];
   socklen_t addr_size;
 
   sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -43,7 +44,15 @@ void main(int argc, char **argv){
 
   bind(sockfd, (struct sockaddr*)&si_me, sizeof(si_me));
   addr_size = sizeof(si_other);
+  while(1){
     recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)& si_other, &addr_size);
-  printf("[+]Data Received: %s", buffer);
+    inet_ntop(AF_INET, &si_other.sin_addr, clientIP, sizeof(clientIP));
+    printf("[+]From: %-15s Data: %s", clientIP, buffer);
+    // for(int i = 0; i< sizeof(buffer); i++)
+    // {
+    //   printf("%2x ", buffer[i]);
+    // }
+  	// printf("\n");
+  }
 
 }

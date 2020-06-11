@@ -27,7 +27,6 @@ void main(int argc, char **argv){
   int sockfd;
   struct sockaddr_in serverAddr;
   socklen_t addr_size;
-  char buffer[] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17};
 
   sockfd = socket(PF_INET, SOCK_DGRAM, 0);
   memset(&serverAddr, '\0', sizeof(serverAddr));
@@ -36,17 +35,19 @@ void main(int argc, char **argv){
   serverAddr.sin_port = htons(port);
   serverAddr.sin_addr.s_addr = inet_addr(ipadr);
 
-  // strcpy(buffer, "Hello Server\n");
+  // char buffer[] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17};
+  char buffer[1024];
+  strcpy(buffer, "Hello Server\n");
  
   bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
 
-  for(int i=0; i<2; i++){
+  for(int i=0; i<1; i++){
     sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
-    printf("[+]Data Send: ");
-    for(int i = 0; i< sizeof(buffer); i++)
-    {
-      printf("%2x ", buffer[i]);
-    }
-  	printf("\n");
+    printf("[+]Data Send: %s", buffer);
+    // for(int i = 0; i< sizeof(buffer); i++)
+    // {
+    //   printf("%2x ", buffer[i]);
+    // }
+  	// printf("\n");
   }
 }
